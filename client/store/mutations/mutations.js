@@ -43,5 +43,15 @@ export default {
   },
   endLoading (state) {
     state.loading = false
+  },
+  updatePoints (state, pointItem) {
+    if (pointItem.type === '2') {
+      state.todo.points -= parseInt(pointItem.point)
+    } else {
+      state.todo.points += parseInt(pointItem.point)
+    }
+  },
+  updateTodoName (state, name) {
+    state.todo.name = name
   }
 }

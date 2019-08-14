@@ -1,8 +1,12 @@
 <template>
   <div>
-    <el-dialog title="修改积分" :visible.sync="dialogVisibale">
+    <el-dialog title="修改积分" :visible.sync="dialogVisibale" :close-on-click-modal="false">
       <span v-show="saveBtnDisable" class="err-tip">兑换积分不能超过现有积分！</span>
       <div class="user-info">
+        <section class="point-input">
+          <label>姓名：</label>
+          <el-input v-model.trim="name" placeholder="请输入姓名" label="姓名：" ></el-input>
+        </section>
         <section>
           <label>手机号：</label>
           <span>{{todo.points_user}}</span>
@@ -26,7 +30,7 @@
         </section>
         <section class="point-input">
           <label>{{radio === '1' ? '新增' : '兑换'}}积分：</label>
-          <el-input v-model.number="points" placeholder="请输入积分" @blur="volidatePoints"></el-input>
+          <el-input v-model="points" placeholder="请输入积分" @change="handlePointsChange" @blur="volidatePoints"></el-input>
         </section>
       </div>
       <div slot="footer" class="dialog-footer">
@@ -67,6 +71,14 @@
         set () {
           this.$emit('closeModifyDialog')
         }
+      },
+      name: {
+        get () {
+          return this.todo.name
+        },
+        set (value) {
+          this.$store.commit('updateTodoName', value)
+        }
       }
     },
     methods: {
@@ -82,6 +94,9 @@
           this.saveBtnDisable = false
           return true
         }
+      },
+      handlePointsChange (event) {
+        // this.$store.commit('updatePoints', {type: this.radio, point: event})
       },
       modifyPoints () {
         if (!this.volidatePoints()) {

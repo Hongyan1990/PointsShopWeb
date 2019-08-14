@@ -20,8 +20,13 @@
                 <p style="margin: 0; line-height: 30px">暂无数据</p>
               </template>
               <el-table-column
+                prop="name"
+                label="用户名"
+                width="120">
+              </el-table-column>
+              <el-table-column
                 prop="points_user"
-                label="用户"
+                label="电话"
                 width="180">
               </el-table-column>
               <el-table-column

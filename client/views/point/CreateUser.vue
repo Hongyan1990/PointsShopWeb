@@ -4,11 +4,15 @@
       <div>
         <span v-show="validateErr" class="err-tip">{{validateMsg}}</span>
         <section class="p-item">
-          <label for="phoneNumber">电话号码：</label>
+          <label>姓名：</label>
+          <el-input v-model.trim="name" placeholder="请输入姓名" label="姓名：" ></el-input>
+        </section>
+        <section class="p-item">
+          <label>电话号码：</label>
           <el-input v-model.trim="points_user" placeholder="请输入手机号码" label="电话号码：" @blur="validatePhone"></el-input>
         </section>
         <section class="p-item">
-          <label for="pointsNumber">积分：</label>
+          <label>积分：</label>
           <el-input v-model.number="points" placeholder="请输入积分" @blur="validatePhone"></el-input>
         </section>
       </div>
@@ -43,7 +47,8 @@
         points_user: '',
         points: 0,
         validateErr: false,
-        validateMsg: ''
+        validateMsg: '',
+        name: ''
       }
     },
     computed: {
@@ -89,7 +94,8 @@
         }
         this.createTodo({
           points_user: this.points_user,
-          points: this.points
+          points: this.points,
+          name: this.name
         }).then(() => {
           this.closeAddUserDialog()
         })
